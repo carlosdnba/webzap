@@ -15,7 +15,7 @@ export const startConnection = async connectionId => {
 export const endConnection = async connectionId => {
   const params = {
     TableName: process.env.tableName,
-    Item: {
+    Key: {
       id: connectionId
     }
   }
