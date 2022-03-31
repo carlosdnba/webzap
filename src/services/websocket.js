@@ -1,10 +1,12 @@
-import { putItem, deleteItem } from './dynamodb'
+import { putItem, deleteItem, query } from './dynamodb'
 
 export const startConnection = async connectionId => {
   const params = {
     TableName: process.env.tableName,
     Item: {
-      id: connectionId
+      pk: 'connection',
+      sk: connectionId,
+      id: connectionId,
     }
   }
 
@@ -16,10 +18,25 @@ export const endConnection = async connectionId => {
   const params = {
     TableName: process.env.tableName,
     Key: {
-      id: connectionId
+      pk: 'connection',
+      sk: connectionId,
+      id: connectionId,
     }
   }
 
   const response = await deleteItem(params)
   return response
-}  
+}
+
+export const getConnections = async () => {
+  const params = {
+    TableName: process.env.tableName,
+    KeyConditionExpression: 'pk = :pk',
+    ExpressionAttributeValues: {
+      ':pk': 'connection'
+    }
+  }
+
+  const response = await query(params)
+  return response.Items
+}

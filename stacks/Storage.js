@@ -5,11 +5,11 @@ export default class Storage extends Stack {
     super(scope, id, props);
 
     // Create the table
-    this.wsTable = new Table(this, "Connections", {
+    this.table = new Table(this, "table", {
       fields: {
         id: TableFieldType.STRING,
       },
-      primaryIndex: { partitionKey: "id" },
+      primaryIndex: { partitionKey: 'pk', sortKey: 'sk' },
     });
   }
 }
