@@ -9,6 +9,7 @@ export default class MyStack extends Stack {
       routes: {
         $connect: 'src/handlers/websocket.connect',
         $disconnect: 'src/handlers/websocket.disconnect',
+        sendMessage: 'src/handlers/message.postMessage',
       },
     });
 
